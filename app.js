@@ -3,9 +3,11 @@ const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
+const methodOverride = require("method-override");
 
 const Listing = require("./models/listing.js");
-const { title } = require("process");
+
+app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -56,6 +58,21 @@ app.post("/listings", async (req, res) => {
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listings");
+});
+
+//edit listing
+app.get("/listings/:id/edit", async (req, res) => {
+  let { id } = req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/edit.ejs", { listing });
+});
+
+//update route
+app.put("/listings/:id", async (req, res) => {
+  let { id } = req.params;
+  let listing = req.body.listing;
+  await Listing.findByIdAndUpdate(id, { ...listing });
+  res.redirect(`/listings/${id}`);
 });
 
 //Testing listing model
