@@ -33,18 +33,25 @@ app.get("/", (req, res) => {
   res.send("working");
 });
 
-app.get("/testlisting", async (req, res) => {
-  let listing1 = new Listing({
-    title: "My New Villa",
-    description: "By the beach",
-    price: 1200,
-    location: "Goa",
-    country: "India",
-  });
-  await listing1.save();
-  console.log("sample saved");
-  res.send("Sucessful");
+//index route -> all listings
+app.get("/listings", async (req, res) => {
+  const allListings = await Listing.find({});
+  res.render("listings/index.ejs", { allListings });
 });
+
+//Testing listing model
+// app.get("/testlisting", async (req, res) => {
+//   let listing1 = new Listing({
+//     title: "My New Villa",
+//     description: "By the beach",
+//     price: 1200,
+//     location: "Goa",
+//     country: "India",
+//   });
+//   await listing1.save();
+//   console.log("sample saved");
+//   res.send("Sucessful");
+// });
 
 app.listen(port, (req, res) => {
   console.log(`Server is running at port ${port}`);
