@@ -4,11 +4,13 @@ const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 
 const Listing = require("./models/listing.js");
 
 app.use(methodOverride("_method"));
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
