@@ -39,6 +39,13 @@ app.get("/listings", async (req, res) => {
   res.render("listings/index.ejs", { allListings });
 });
 
+//show route -> show particular listing
+app.get("/listings/:id", async (req, res) => {
+  let { id } = req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/show.ejs", { listing });
+});
+
 //Testing listing model
 // app.get("/testlisting", async (req, res) => {
 //   let listing1 = new Listing({
