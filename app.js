@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
 
+const Listing = require("./models/listing.js");
+const { title } = require("process");
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
@@ -28,6 +31,19 @@ async function main() {
 
 app.get("/", (req, res) => {
   res.send("working");
+});
+
+app.get("/testlisting", async (req, res) => {
+  let listing1 = new Listing({
+    title: "My New Villa",
+    description: "By the beach",
+    price: 1200,
+    location: "Goa",
+    country: "India",
+  });
+  await listing1.save();
+  console.log("sample saved");
+  res.send("Sucessful");
 });
 
 app.listen(port, (req, res) => {
