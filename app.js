@@ -6,6 +6,7 @@ const port = 8080;
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
+const session = require("express-session");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -19,6 +20,14 @@ app.use(express.static(path.join(__dirname, "public/css")));
 app.use(express.static(path.join(__dirname, "public/js")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const sessionOptions = {
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUnitialized: true,
+};
+
+app.use(session(sessionOptions));
 
 main()
   .then((res) => {
