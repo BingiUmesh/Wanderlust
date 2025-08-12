@@ -19,7 +19,6 @@ router.post(
         username: username,
       });
       let registereduser = await User.register(newUser, password);
-      // console.log(registereduser);
       req.login(registereduser, (err) => {
         if (err) {
           return next(err);
@@ -49,7 +48,6 @@ router.post(
   async (req, res) => {
     req.flash("success", "Welcome back!");
     let redirectUrl = res.locals.redirectUrl || "/listings";
-    console.log(res.locals.redirectUrl);
     res.redirect(redirectUrl);
   }
 );
