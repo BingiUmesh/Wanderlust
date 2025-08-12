@@ -66,6 +66,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// demo user
+app.get("/demouser", async (req, res) => {
+  let fakeUser = new User({
+    email: "umesh@gmail.com",
+    username: "umesh-web",
+  });
+  let registereduser = await User.register(fakeUser, "helloworld");
+  res.send(registereduser);
+});
+
 // Listing
 app.use("/listings", listings);
 // Review
