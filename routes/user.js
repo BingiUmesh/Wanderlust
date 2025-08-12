@@ -45,4 +45,15 @@ router.post(
   }
 );
 
+// logout
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "Logged Out!");
+    res.redirect("/listings");
+  });
+});
+
 module.exports = router;
