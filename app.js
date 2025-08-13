@@ -40,14 +40,13 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  // await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
   await mongoose.connect(dbUrl);
 }
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret: "mysupersecretcode",
+    secret: process.env.SECRET,
   },
   touchAfter: 24 * 3600,
 });
@@ -58,7 +57,7 @@ store.on("error", () => {
 
 const sessionOptions = {
   store: store,
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -67,10 +66,6 @@ const sessionOptions = {
   },
   httpOnly: true,
 };
-
-// app.get("/", (req, res) => {
-//   res.send("working");
-// });
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -90,16 +85,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-// demo user
-// app.get("/demouser", async (req, res) => {
-//   let fakeUser = new User({
-//     email: "umesh@gmail.com",
-//     username: "umesh-web",
-//   });
-//   let registereduser = await User.register(fakeUser, "helloworld");
-//   res.send(registereduser);
-// });
 
 // Listing
 app.use("/listings", listingRouter);
