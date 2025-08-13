@@ -43,4 +43,10 @@ router.get(
   wrapAsync(listingController.renderEditForm)
 );
 
+// category
+router.get(
+  "/category/:category",
+  wrapAsync(listingController.showCategoryListing)
+);
+
 module.exports = router;
