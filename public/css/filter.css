@@ -1,0 +1,38 @@
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-toggle {
+    display: flex;
+    align-items: center;
+}
+
+#carouselExampleAutoplaying img {
+    height: 70vh;
+    width: 70vw !important;
+    object-fit: cover;
+}
