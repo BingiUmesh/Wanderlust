@@ -70,6 +70,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.currentUser = req.user;
   res.locals.originalUrl = req.originalUrl;
+
   next();
 });
 

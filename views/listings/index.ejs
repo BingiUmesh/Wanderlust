@@ -1,5 +1,27 @@
 <%- layout("/layouts/boilerplate.ejs") -%>
 
+<style>
+  @media (max-width: 768px) {
+    #filters {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 1rem !important;
+      justify-content: center;
+      align-items: center;
+    }
+    .filter {
+      height: 40px;
+      width: 40px;
+      margin-right: 2rem;
+    }
+
+    #carouselExampleAutoplaying,
+    .tax-toggle {
+      display: none;
+    }
+  }
+</style>
+
 <div id="filters">
   <a class="filter" href="/listings/category/trending">
     <div><i class="fa-solid fa-fire"></i></div>
